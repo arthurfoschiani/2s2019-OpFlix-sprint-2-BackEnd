@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.OpFlix.WebApi.Domains;
@@ -22,12 +23,31 @@ namespace Senai.OpFlix.WebApi.Controllers
             LancamentoRepository = new LancamentoRepository();
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Listar()
         {
             return Ok(LancamentoRepository.Listar());
         }
 
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult BuscarPorId (int id)
+        {
+            try
+            {
+                Lancamento lancamento = LancamentoRepository.BuscarPorId(id);
+                if (lancamento == null)
+                    return NotFound();
+                return Ok(lancamento);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Cadastrar(Lancamento lancamento)
         {
@@ -41,7 +61,8 @@ namespace Senai.OpFlix.WebApi.Controllers
                 return BadRequest(new { mensagem = "Ocorreu um erro: " + ex.Message });
             }
         }
-        
+
+        [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Atualizar(Lancamento lancamento)
         {
@@ -59,7 +80,8 @@ namespace Senai.OpFlix.WebApi.Controllers
                 return BadRequest();
             }
         }
-        
+
+        [Authorize(Roles = "Administrador")]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {

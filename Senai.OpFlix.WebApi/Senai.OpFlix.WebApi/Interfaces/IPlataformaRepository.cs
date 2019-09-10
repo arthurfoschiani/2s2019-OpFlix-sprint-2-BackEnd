@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Senai.OpFlix.WebApi.Domains;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Senai.OpFlix.WebApi.Interfaces
 {
-    interface IPlataformaRepository
+    public interface IPlataformaRepository
     {
+        Plataforma BuscarPorId(int id);
+        List<Plataforma> Listar();
+        void Cadastrar(Plataforma plataforma);
+        void Atualizar(Plataforma plataforma);
     }
 }
