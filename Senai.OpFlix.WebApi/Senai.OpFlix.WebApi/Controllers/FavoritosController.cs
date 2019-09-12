@@ -15,15 +15,19 @@ namespace Senai.OpFlix.WebApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class FavoritoController : ControllerBase
+    public class FavoritosController : ControllerBase
     {
         private IFavoritoRepository FavoritoRepository { get; set; }
 
-        public FavoritoController()
+        public FavoritosController()
         {
             FavoritoRepository = new FavoritoRepository();
         }
 
+        /// <summary>
+        /// Listar todos os favoritos de um usuário
+        /// </summary>
+        /// <returns>Uma lista de favoritos</returns>
         [Authorize]
         [HttpGet]
         public IActionResult Listar()
@@ -32,6 +36,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             return Ok(FavoritoRepository.Listar(UsuarioId));
         }
 
+        /// <summary>
+        /// Cadastrar um novo favorito do usuário
+        /// </summary>
+        /// <param name="favorito"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize]
         [HttpPost]
         public IActionResult Cadastrar(Favorito favorito)
@@ -47,6 +56,19 @@ namespace Senai.OpFlix.WebApi.Controllers
             {
                 return BadRequest(new { mensagem = "Ocorreu um erro: " + ex.Message });
             }
+        }
+
+        /// <summary>
+        /// Deletar um lançamento da área de favoritos de um usuário
+        /// </summary>
+        /// <param name="IdLancamento"></param>
+        /// <returns>Uma verificação</returns>
+        [HttpDelete("{IdLancamento}")]
+        public IActionResult Deletar(int IdLancamento)
+        {
+            int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
+            FavoritoRepository.Deletar(IdLancamento, IdUsuario);
+            return Ok();
         }
     }
 }

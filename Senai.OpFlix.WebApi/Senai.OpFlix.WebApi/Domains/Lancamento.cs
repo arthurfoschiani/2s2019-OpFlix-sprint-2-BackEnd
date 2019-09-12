@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Senai.OpFlix.WebApi.Domains
 {
@@ -12,6 +13,7 @@ namespace Senai.OpFlix.WebApi.Domains
         public string TempoDuracao { get; set; }
         public int? IdCategoria { get; set; }
         public int? IdDiretor { get; set; }
+        [Required]
         public DateTime? DataLancamento { get; set; }
         public int? IdPlataforma { get; set; }
         public string Descricao { get; set; }

@@ -14,15 +14,19 @@ namespace Senai.OpFlix.WebApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class LancamentoController : ControllerBase
+    public class LancamentosController : ControllerBase
     {
         private ILancamentoRepository LancamentoRepository { get; set; }
 
-        public LancamentoController()
+        public LancamentosController()
         {
             LancamentoRepository = new LancamentoRepository();
         }
 
+        /// <summary>
+        /// Listar todos os lançamentos
+        /// </summary>
+        /// <returns>Uma lista de lançamntos</returns>
         [Authorize]
         [HttpGet]
         public IActionResult Listar()
@@ -30,9 +34,14 @@ namespace Senai.OpFlix.WebApi.Controllers
             return Ok(LancamentoRepository.Listar());
         }
 
+        /// <summary>
+        /// Buscar um lançamento pelo seu id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Um lançamento</returns>
         [Authorize]
         [HttpGet("{id}")]
-        public IActionResult BuscarPorId (int id)
+        public IActionResult BuscarPorId(int id)
         {
             try
             {
@@ -47,6 +56,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Cadastrar um novo lançamento
+        /// </summary>
+        /// <param name="lancamento"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Cadastrar(Lancamento lancamento)
@@ -62,6 +76,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualizar um determinado lançamento buscado pelo seu id
+        /// </summary>
+        /// <param name="lancamento"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Atualizar(Lancamento lancamento)
@@ -81,12 +100,41 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletar um determinado lançamento buscado pelo seu id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {
             LancamentoRepository.Deletar(id);
             return Ok();
+        }
+
+        /// <summary>
+        /// Listar lançamentos que tiverem a mesma plataforma
+        /// </summary>
+        /// <param name="Nome"></param>
+        /// <returns>Lista de lançamentos</returns>
+        [Authorize]
+        [HttpGet("FiltrarPorPlataforma/{nome}")]
+        public IActionResult FiltrarPorPlataforma (string Nome)
+        {
+            return Ok(LancamentoRepository.FiltrarPorNome(Nome));
+        }
+
+        /// <summary>
+        /// Listar lançamentos que tiveram o mesmo dia de lançamento
+        /// </summary>
+        /// <param name="lancamento"></param>
+        /// <returns>Lista de lançamentos</returns>
+        [Authorize]
+        [HttpGet("FiltrarPorDataLancamento")]
+        public IActionResult FiltrarPorDataLancamento (Lancamento lancamento)
+        {
+            return Ok(LancamentoRepository.FiltrarPorDataLancamento(lancamento));
         }
     }
 }

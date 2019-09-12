@@ -10,6 +10,10 @@ namespace Senai.OpFlix.WebApi.Repositories
 {
     public class LancamentoRepository : ILancamentoRepository
     {
+        /// <summary>
+        /// Atualizar os dados de um lançamento
+        /// </summary>
+        /// <param name="lancamento"></param>
         public void Atualizar(Lancamento lancamento)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -30,6 +34,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Adicionar um novo lançamento
+        /// </summary>
+        /// <param name="lancamento"></param>
         public void Cadastrar(Lancamento lancamento)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -39,6 +47,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Deletar um lançamento buscado por seu Id
+        /// </summary>
+        /// <param name="id"></param>
         public void Deletar(int id)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -49,6 +61,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Listar todos os lançamentos
+        /// </summary>
+        /// <returns>Uma lista de lançamentos</returns>
         public List<Lancamento> Listar()
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -57,11 +73,42 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Buscar por id um lançamento
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Um lançamento</returns>
         public Lancamento BuscarPorId(int id)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
                 return ctx.Lancamento.FirstOrDefault(x => x.IdLancamento == id);
+            }
+        }
+
+        /// <summary>
+        /// Listar os lançamentos de uma mesma plataforma
+        /// </summary>
+        /// <param name="Nome"></param>
+        /// <returns>Uma lista de lançamentos</returns>
+        public List<Lancamento> FiltrarPorNome (string Nome)
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                return ctx.Lancamento.Include(x => x.IdPlataformaNavigation).Where(x => x.IdPlataformaNavigation.Plataforma1 == Nome).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Listar os lançamentos a partir da busca de uma data
+        /// </summary>
+        /// <param name="lancamento"></param>
+        /// <returns>Uma lista de lançamentos</returns>
+        public List<Lancamento> FiltrarPorDataLancamento (Lancamento lancamento)
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                return ctx.Lancamento.Where(x => x.DataLancamento == lancamento.DataLancamento).ToList();
             }
         }
     }

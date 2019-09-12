@@ -14,15 +14,19 @@ namespace Senai.OpFlix.WebApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class PlataformaController : ControllerBase
+    public class PlataformasController : ControllerBase
     {
         private IPlataformaRepository PlataformaRepository { get; set; }
 
-        public PlataformaController()
+        public PlataformasController()
         {
             PlataformaRepository = new PlataformaRepository();
         }
 
+        /// <summary>
+        /// Listar todas as plataformas 
+        /// </summary>
+        /// <returns>Uma lista de plataformas</returns>
         [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult Listar()
@@ -30,6 +34,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             return Ok(PlataformaRepository.Listar());
         }
 
+        /// <summary>
+        /// Adicionar uma nova plataforma
+        /// </summary>
+        /// <param name="plataforma"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Cadastrar(Plataforma plataforma)
@@ -45,6 +54,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualizar os dados de uma determinada plataforma buscada pelo id
+        /// </summary>
+        /// <param name="plataforma"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Atualizar(Plataforma plataforma)

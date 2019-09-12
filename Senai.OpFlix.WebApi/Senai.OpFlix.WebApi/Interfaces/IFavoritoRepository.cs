@@ -10,5 +10,6 @@ namespace Senai.OpFlix.WebApi.Interfaces
     {
         List<Favorito> Listar(int UsuarioId);
         void Cadastrar(Favorito favorito);
+        void Deletar(int IdLancamento, int IdUsuario);
     }
 }

@@ -10,6 +10,10 @@ namespace Senai.OpFlix.WebApi.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {
+        /// <summary>
+        /// Atualizar uma categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         public void Atualizar(Categoria categoria)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -22,6 +26,11 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Buscar uma categoria pelo seu Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Uma categoria</returns>
         public Categoria BuscarPorId(int id)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -30,6 +39,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Cadastrar uma nova categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         public void Cadastrar(Categoria categoria)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -39,6 +52,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Listar todas as categorias
+        /// </summary>
+        /// <returns>Uma lista de categorias</returns>
         public List<Categoria> Listar()
         {
             using (OpFlixContext ctx = new OpFlixContext())

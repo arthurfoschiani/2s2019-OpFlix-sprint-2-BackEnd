@@ -11,6 +11,11 @@ namespace Senai.OpFlix.WebApi.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
+        /// <summary>
+        /// Buscar o email e senha presente no banco de dados e comparar se são iguais as inseridas pelo usuário
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>Um usuário que possui aquele email e senha</returns>
         public Usuario BuscarPorEmailSenha(LoginViewModel login)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -24,6 +29,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Cadastrar um novo usuário
+        /// </summary>
+        /// <param name="usuarios"></param>
         public void Cadastrar(Usuario usuarios)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -33,6 +42,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Listar todos os usuários
+        /// </summary>
+        /// <returns>Uma lista de usuários</returns>
         public List<UsuarioViewModel> Listar()
         {
             List<UsuarioViewModel> usuariosViewModel = new List<UsuarioViewModel>();

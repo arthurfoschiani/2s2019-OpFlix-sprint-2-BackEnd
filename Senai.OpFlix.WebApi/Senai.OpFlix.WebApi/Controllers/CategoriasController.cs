@@ -14,15 +14,19 @@ namespace Senai.OpFlix.WebApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class CategoriaController : ControllerBase
+    public class CategoriasController : ControllerBase
     {
         private ICategoriaRepository CategoriaRepository { get; set; }
 
-        public CategoriaController()
+        public CategoriasController()
         {
             CategoriaRepository = new CategoriaRepository();
         }
 
+        /// <summary>
+        /// Listar todas as categorias
+        /// </summary>
+        /// <returns>Lista de categorias</returns>
         [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult Listar()
@@ -30,6 +34,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             return Ok(CategoriaRepository.Listar());
         }
 
+        /// <summary>
+        /// Adicionar novas categorias
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Cadastrar(Categoria categoria)
@@ -45,6 +54,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualizar um determinada as categorias
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Atualizar(Categoria categoria)

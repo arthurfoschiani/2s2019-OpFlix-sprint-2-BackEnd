@@ -14,15 +14,19 @@ namespace Senai.OpFlix.WebApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class UsuariosController : ControllerBase
     {
         private IUsuarioRepository UsuarioRepository { get; set; }
 
-        public UsuarioController()
+        public UsuariosController()
         {
             UsuarioRepository = new UsuarioRepository();
         }
 
+        /// <summary>
+        /// Listar todos os usuários
+        /// </summary>
+        /// <returns>Lista de usuários</returns>
         [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult Listar()
@@ -30,6 +34,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             return Ok(UsuarioRepository.Listar());
         }
 
+        /// <summary>
+        /// O administrador pode adicionar um novo usuário de qualquer tipo
+        /// </summary>
+        /// <param name="usuarios"></param>
+        /// <returns>uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Cadastrar(Usuario usuarios)
@@ -45,6 +54,11 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Adicionar um novo usuario do tipo comum
+        /// </summary>
+        /// <param name="usuarios"></param>
+        /// <returns>Uma verificação</returns>
         [HttpPost("CadastrarCliente")]
         public IActionResult CadastrarComum(Usuario usuarios)
         {

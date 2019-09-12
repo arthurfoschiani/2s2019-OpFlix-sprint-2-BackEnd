@@ -10,6 +10,10 @@ namespace Senai.OpFlix.WebApi.Repositories
 {
     public class PlataformaRepository : IPlataformaRepository
     {
+        /// <summary>
+        /// Atualizar os dados de uma plataforma
+        /// </summary>
+        /// <param name="plataforma"></param>
         public void Atualizar(Plataforma plataforma)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -22,6 +26,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Adicionar uma nova plataforma
+        /// </summary>
+        /// <param name="plataforma"></param>
         public void Cadastrar(Plataforma plataforma)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -31,6 +39,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Listar todas as plataformas
+        /// </summary>
+        /// <returns>Uma lista de plataformas</returns>
         public List<Plataforma> Listar()
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -39,6 +51,11 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        /// <summary>
+        /// Buscar pelo id uma plataforma
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Uma plataforma</returns>
         public Plataforma BuscarPorId(int id)
         {
             using (OpFlixContext ctx = new OpFlixContext())
