@@ -145,6 +145,16 @@
 				{
 					"name": "Lancamentos.FiltrarPorPlataforma",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGhldXNAZW1haWwuY29tIiwianRpIjoiMTgiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJDbGllbnRlIiwiZXhwIjoxNTY4Mzc1NjY1LCJpc3MiOiJPcEZsaXguV2ViQXBpIiwiYXVkIjoiT3BGbGl4LldlYkFwaSJ9.D3hfcN2O0iMqA2Zllq-asDKAKEMw1JN8hD1Ll1OUR58",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -170,6 +180,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGhldXNAZW1haWwuY29tIiwianRpIjoiMTgiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJDbGllbnRlIiwiZXhwIjoxNTY4Mzc1NjY1LCJpc3MiOiJPcEZsaXguV2ViQXBpIiwiYXVkIjoiT3BGbGl4LldlYkFwaSJ9.D3hfcN2O0iMqA2Zllq-asDKAKEMw1JN8hD1Ll1OUR58",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -218,7 +238,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\" : \"erik@email.com\",\n\t\"senha\" : \"123456\"\n}"
+							"raw": "{\n\t\"email\" : \"matheus@email.com\",\n\t\"senha\" : \"123456\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/login",
@@ -243,7 +263,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFydGh1ckBlbWFpbC5jb20iLCJqdGkiOiIxMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE1NjgxMjA2NjcsImlzcyI6Ik9wRmxpeC5XZWJBcGkiLCJhdWQiOiJPcEZsaXguV2ViQXBpIn0.GOwetxfX2y7URFB8gRB85fybsQy42rso22dESQpsP3k",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFydGh1ckBlbWFpbC5jb20iLCJqdGkiOiIxMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE1NjgzNzU0ODIsImlzcyI6Ik9wRmxpeC5XZWJBcGkiLCJhdWQiOiJPcEZsaXguV2ViQXBpIn0.s_Y4SMxOJSMMrB7uzwUQo0STFuzKFElYEalJ7fv3rS0",
 									"type": "string"
 								}
 							]
@@ -268,6 +288,16 @@
 				{
 					"name": "Usuarios.Cadastrar",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFydGh1ckBlbWFpbC5jb20iLCJqdGkiOiIxMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE1NjgzNzU0ODIsImlzcyI6Ik9wRmxpeC5XZWJBcGkiLCJhdWQiOiJPcEZsaXguV2ViQXBpIn0.s_Y4SMxOJSMMrB7uzwUQo0STFuzKFElYEalJ7fv3rS0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -279,7 +309,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nomeUsuario\": \"Arthur\",\n    \"emailUsuario\": \"arthur@email.com\",\n    \"senhaUsuario\" : \"123456\",\n    \"telefone\": \"1 1111-1111\",\n    \"cpf\": \"147258369\",\n    \"dataDeNascimento\": \"2003-12-21T00:00:00\",\n    \"tipoUsuario\": 1\n}"
+							"raw": "{\n    \"nomeUsuario\": \"Matheus A\",\n    \"emailUsuario\": \"matheus@email.com\",\n    \"senhaUsuario\" : \"123456\",\n    \"telefone\": \"1 1212-1212\",\n    \"cpf\": \"147257469\",\n    \"dataDeNascimento\": \"2002-09-21T00:00:00\",\n    \"tipoUsuario\": 2\n}"
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/usuarios",
