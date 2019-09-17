@@ -119,10 +119,10 @@ namespace Senai.OpFlix.WebApi.Controllers
         /// <param name="Nome"></param>
         /// <returns>Lista de lançamentos</returns>
         [Authorize]
-        [HttpGet("FiltrarPorPlataforma/{nome}")]
-        public IActionResult FiltrarPorPlataforma (string Nome)
+        [HttpGet("FiltrarPorPlataforma/{plataforma}")]
+        public IActionResult FiltrarPorPlataforma (string plataforma)
         {
-            return Ok(LancamentoRepository.FiltrarPorNome(Nome));
+            return Ok(LancamentoRepository.FiltrarPorPlataforma(plataforma));
         }
 
         /// <summary>

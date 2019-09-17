@@ -91,11 +91,11 @@ namespace Senai.OpFlix.WebApi.Repositories
         /// </summary>
         /// <param name="Nome"></param>
         /// <returns>Uma lista de lançamentos</returns>
-        public List<Lancamento> FiltrarPorNome (string Nome)
+        public List<Lancamento> FiltrarPorPlataforma (string plataforma)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                return ctx.Lancamento.Include(x => x.IdPlataformaNavigation).Where(x => x.IdPlataformaNavigation.Plataforma1 == Nome).ToList();
+                return ctx.Lancamento.Include(x => x.IdPlataformaNavigation).Where(x => x.IdPlataformaNavigation.Plataforma1 == plataforma).ToList();
             }
         }
 
