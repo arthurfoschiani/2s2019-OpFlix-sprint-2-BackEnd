@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Senai.OpFlix.WebApi.Domains;
 using Senai.OpFlix.WebApi.Interfaces;
+using Senai.OpFlix.WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace Senai.OpFlix.WebApi.Repositories
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                return ctx.Lancamento.ToList();
+                return ctx.Lancamento.Include(x => x.IdCategoriaNavigation).Include(x => x.IdDiretorNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoMidiaNavigation).ToList();
             }
         }
 
@@ -89,7 +90,7 @@ namespace Senai.OpFlix.WebApi.Repositories
         /// <summary>
         /// Listar os lançamentos de uma mesma plataforma
         /// </summary>
-        /// <param name="Nome"></param>
+        /// <param name="plataforma"></param>
         /// <returns>Uma lista de lançamentos</returns>
         public List<Lancamento> FiltrarPorPlataforma (string plataforma)
         {
@@ -100,15 +101,28 @@ namespace Senai.OpFlix.WebApi.Repositories
         }
 
         /// <summary>
+        /// Listar os lançamentos de uma mesma categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns>Uma lista de lançamentos</returns>
+        public List<Lancamento> FiltrarPorCategoria(int categoria)
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                return ctx.Lancamento.Include(x => x.IdCategoriaNavigation).Include(x => x.IdDiretorNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoMidiaNavigation).Where(x => x.IdCategoria == categoria).ToList();
+            }
+        }
+
+        /// <summary>
         /// Listar os lançamentos a partir da busca de uma data
         /// </summary>
         /// <param name="lancamento"></param>
         /// <returns>Uma lista de lançamentos</returns>
-        public List<Lancamento> FiltrarPorDataLancamento (Lancamento lancamento)
+        public List<Lancamento> FiltrarPorDataLancamento (int lancamento)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                return ctx.Lancamento.Where(x => x.DataLancamento == lancamento.DataLancamento).ToList();
+                return ctx.Lancamento.Include(x => x.IdCategoriaNavigation).Include(x => x.IdDiretorNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoMidiaNavigation).Where(x => x.DataLancamento.Value.Month == lancamento).ToList();
             }
         }
     }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Senai.OpFlix.WebApi.Domains;
 using Senai.OpFlix.WebApi.Interfaces;
 using Senai.OpFlix.WebApi.Repositories;
+using Senai.OpFlix.WebApi.ViewModels;
 
 namespace Senai.OpFlix.WebApi.Controllers
 {
@@ -63,11 +64,11 @@ namespace Senai.OpFlix.WebApi.Controllers
         /// <returns>Uma verificação</returns>
         [Authorize(Roles = "Administrador")]
         [HttpPost]
-        public IActionResult Cadastrar(Lancamento lancamento)
+        public IActionResult Cadastrar(Lancamento lancamentos)
         {
             try
             {
-                LancamentoRepository.Cadastrar(lancamento);
+                LancamentoRepository.Cadastrar(lancamentos);
                 return Ok();
             }
             catch (Exception ex)
@@ -126,15 +127,41 @@ namespace Senai.OpFlix.WebApi.Controllers
         }
 
         /// <summary>
+        /// Listar lançamentos que tiverem a mesma categoria
+        /// </summary>
+        /// <param name="plataforma"></param>
+        /// <returns>Lista de categorias</returns>
+        [Authorize]
+        [HttpGet("FiltrarPorCategoria/{categoria}")]
+        public IActionResult FiltrarPorCategoria(int categoria)
+        {
+            return Ok(LancamentoRepository.FiltrarPorCategoria(categoria));
+        }
+
+        [Authorize]
+        [HttpGet("FiltrarPorCategoria/")]
+        public IActionResult Nula ()
+        {
+            return Ok(LancamentoRepository.Listar());
+        }
+
+        /// <summary>
         /// Listar lançamentos que tiveram o mesmo dia de lançamento
         /// </summary>
         /// <param name="lancamento"></param>
         /// <returns>Lista de lançamentos</returns>
         [Authorize]
-        [HttpGet("FiltrarPorDataLancamento")]
-        public IActionResult FiltrarPorDataLancamento (Lancamento lancamento)
+        [HttpGet("FiltrarPorDataLancamento/{lancamento}")]
+        public IActionResult FiltrarPorDataLancamento (int lancamento)
         {
             return Ok(LancamentoRepository.FiltrarPorDataLancamento(lancamento));
+        }
+
+        [Authorize]
+        [HttpGet("FiltrarPorDataLancamento/")]
+        public IActionResult Nulo()
+        {
+            return Ok(LancamentoRepository.Listar());
         }
     }
 }

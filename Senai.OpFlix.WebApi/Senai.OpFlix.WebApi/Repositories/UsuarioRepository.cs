@@ -63,6 +63,7 @@ namespace Senai.OpFlix.WebApi.Repositories
                     usuarioViewModel.Cpf = item.Cpf;
                     usuarioViewModel.DataDeNascimento = item.DataDeNascimento;
                     usuarioViewModel.TipoUsuario = item.TipoUsuario;
+                    usuarioViewModel.TipoUsuarioNavigation = item.TipoUsuarioNavigation;
                     usuarioViewModel.Favoritos = item.Favoritos;
                     usuariosViewModel.Add(usuarioViewModel);
                 }

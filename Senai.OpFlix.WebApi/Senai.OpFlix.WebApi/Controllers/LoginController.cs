@@ -42,6 +42,8 @@ namespace Senai.OpFlix.WebApi.Controllers
 
                 var claims = new[]
                 {
+                    new Claim("Nome", usuarioBuscado.NomeUsuario),
+                    new Claim("Permissao", Convert.ToString( usuarioBuscado.TipoUsuario)),
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.EmailUsuario),
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
                     new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuarioNavigation.TipoUsuario1)
@@ -55,7 +57,7 @@ namespace Senai.OpFlix.WebApi.Controllers
                     issuer: "OpFlix.WebApi",
                     audience: "OpFlix.WebApi",
                     claims: claims,
-                    expires: DateTime.Now.AddHours(1),
+                    expires: DateTime.Now.AddYears(10),
                     signingCredentials: creds);
 
                 return Ok(new

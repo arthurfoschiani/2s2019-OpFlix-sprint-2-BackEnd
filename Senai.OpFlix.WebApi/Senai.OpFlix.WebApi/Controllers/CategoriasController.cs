@@ -27,7 +27,7 @@ namespace Senai.OpFlix.WebApi.Controllers
         /// Listar todas as categorias
         /// </summary>
         /// <returns>Lista de categorias</returns>
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         [HttpGet]
         public IActionResult Listar()
         {
